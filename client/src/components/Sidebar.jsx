@@ -2,8 +2,8 @@ import React from "react";
 
 const Sidebar = () => {
   return (
-    <div className="m-5 flex flex-col items-center justify-center flex-3/12  pb-7 bg-[#fdfbfb] rounded-xl">
-      <div className="flex flex-col items-center justify-center">
+    <div className="m-5 flex flex-col items-center justify-center flex-3/12  pb-7 bg-[#fdfbfb] rounded-xl h-fit ">
+      <div className="flex flex-col items-center justify-center mt-5">
         <span className=" p-2 w-4/5 border-t-1 border-b-1 border-[#a7a4a4] font-varela text-xl/[20px] color-[#222] font-semibold text-center ">
           About me
         </span>
