@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Topbar = () => {
   return (
@@ -11,11 +12,21 @@ const Topbar = () => {
       </div>
       <div className="flex-6 flex items-center justify-center">
         <ul className="flex items-center justify-center gap-5 text-2xl font-light cursor-pointer">
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Write</li>
-          <li>Log out</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/">About</Link>
+          </li>
+          <li>
+            <Link to="/">Contact</Link>
+          </li>
+          <li>
+            <Link to="/write">Write</Link>
+          </li>
+          <li>
+            <Link to="/">Log out</Link>
+          </li>
         </ul>
       </div>
 
