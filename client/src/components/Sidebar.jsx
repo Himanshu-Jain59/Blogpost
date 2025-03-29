@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Sidebar = () => {
+  const [cat, setCat] = useState([]);
+
+  useEffect(() => {
+    const getCats = async () => {
+      const res = await axios.get("/api/categories/", {
+        withCredentials: true,
+      });
+      console.log(res);
+      setCat(res.data);
+      // console.log(posts);
+    };
+
+    getCats();
+  }, []);
+
   return (
     <div className="m-5 flex flex-col items-center justify-center flex-3/12  pb-7 bg-[#fdfbfb] rounded-xl h-fit ">
       <div className="flex flex-col items-center justify-center mt-5">
@@ -24,12 +40,12 @@ const Sidebar = () => {
           Categories
         </span>
         <ul className="mb-7.5 text-xl text-center">
-          <li className="inline-block w-1/2 mt-4 cursor-pointer">Life</li>
-          <li className="inline-block w-1/2 mt-4 cursor-pointer">Music</li>
-          <li className="inline-block w-1/2 mt-4 cursor-pointer">Style</li>
-          <li className="inline-block w-1/2 mt-4 cursor-pointer">Sport</li>
-          <li className="inline-block w-1/2 mt-4 cursor-pointer">Tech</li>
-          <li className="inline-block w-1/2 mt-4 cursor-pointer">Anime</li>
+          {cat.map((c) => (
+            <li className="block w-1/2 mt-4 cursor-pointer">
+              {console.log(c)}
+              {c.name}
+            </li>
+          ))}
         </ul>
       </div>
       <div className="flex flex-col items-center justify-center flex-3/12 m-5 pb-7 bg-[#fdfbfb] rounded-xl">
