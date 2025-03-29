@@ -68,7 +68,7 @@ router.delete("/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-
+    console.log("got post by id ");
     res.status(200).json(post);
   } catch (err) {}
 });
@@ -86,7 +86,7 @@ router.get("/?", async (req, res) => {
     } else {
       posts = await Post.find();
     }
-
+    console.log("got post");
     res.status(200).json(posts);
   } catch (err) {
     console.error(err);
