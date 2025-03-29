@@ -7,6 +7,9 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const catRoute = require("./routes/categories");
+const cors = require("cors");
+
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 dotenv.config();
 
