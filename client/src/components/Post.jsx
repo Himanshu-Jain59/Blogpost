@@ -2,13 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
+  const PF = "http://localhost:4000/public/";
+
   return (
     <div className=" w-96 mx-6 mb-10">
-      <img
-        className="w-full h-70 object-cover rounded-lg "
-        src="https://a-z-animals.com/media/2022/10/iStock-1298291139-1024x680.jpg"
-        alt=""
-      />
+      <Link to={`/post/${post._id}`}>
+        <img
+          className="w-full h-70 object-cover rounded-lg "
+          src={PF + post.photo}
+          alt=""
+        />
+      </Link>
       <div className="mt-4 flex flex-col items-center justify-center">
         <div>
           {post.categories.map((ct) => (
