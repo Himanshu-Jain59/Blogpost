@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import Posts from "../components/Posts";
 import Sidebar from "../components/Sidebar";
 import { useLocation } from "react-router-dom";
+import { Context } from "../context/Context";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const { search } = useLocation();
+  const { user } = useContext(Context);
 
   useEffect(() => {
     const fetchPost = async () => {
