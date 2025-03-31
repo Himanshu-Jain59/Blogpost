@@ -15,7 +15,7 @@ const Topbar = () => {
   };
 
   return (
-    <div className="bg-white w-full h-[50px] top-0 sticky flex items-center justify-center font-josefin z-10">
+    <div className="bg-white w-full h-[50px] top-0 sticky flex items-center justify-center font-josefin z-11">
       <div className="flex-3 flex items-center justify-center  gap-3">
         <i className="text-2xl color-[#444] cursor-pointer fa-brands fa-square-facebook"></i>
         <i className="text-2xl color-[#444] cursor-pointer fa-brands fa-square-twitter"></i>
