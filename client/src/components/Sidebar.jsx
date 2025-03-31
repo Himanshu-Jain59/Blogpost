@@ -20,7 +20,7 @@ const Sidebar = () => {
 
   return (
     <div className="m-5 flex flex-col items-center justify-center flex-3/12  py-10 bg-[#f1efef] rounded-xl h-min ">
-      <div className="flex flex-col items-center justify-center ">
+      {/* <div className="flex flex-col items-center justify-center ">
         <span className=" p-2 w-4/5 border-t-1 border-b-1 border-[#a7a4a4] font-varela text-xl/[20px] color-[#222] font-semibold text-center ">
           About me
         </span>
@@ -35,8 +35,8 @@ const Sidebar = () => {
           tempora repudiandae laboriosam expedita fugiat necessitatibus fugit
           illo, corporis quasi. Inventore, doloremque!
         </p>
-      </div>
-      <div className="flex flex-col items-center justify-center mt-5">
+      </div> */}
+      <div className="flex flex-col items-center justify-center ">
         <span className="m-3 p-2 w-4/5 border-t-1 border-b-1 border-[#a7a4a4] font-varela text-xl/[20px] color-[#222] font-semibold text-center ">
           Categories
         </span>
