@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { Context } from "../context/Context";
 import axios from "axios";
+import DeleteMsg from "../components/DeleteMsg";
 
 const Settings = () => {
   const { user, dispatch } = useContext(Context);
@@ -10,18 +11,14 @@ const Settings = () => {
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
-  const PF = "http://localhost:4000/public/";
-  const handleDelete = async () => {
-    try {
-      await axios.delete(`/api/user/${user._id}`, {
-        data: { userId: user._id },
-      });
-      dispatch({ type: "LOGOUT" });
-      window.location.replace("/");
-    } catch (error) {
-      console.error(err);
-    }
+
+  const [showDeleteMsg, setShowDeleteMsg] = useState(false);
+
+  const handleCancel = () => {
+    setShowDeleteMsg(false); // Hide the delete confirmation message
   };
+
+  const PF = "http://localhost:4000/public/";
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -56,82 +53,89 @@ const Settings = () => {
   };
 
   return (
-    <div className="flex font-lora ml-10 mt-5">
-      <div className="flex-9 p-5">
-        <div className="flex items-center justify-between">
-          <span className="text-3xl text-amber-500">Update Your Account</span>
-          <span
-            className=" mb-1 text-base font-medium text-red-500 cursor-pointer"
-            onClick={handleDelete}
-          >
-            Delete Your Account
-          </span>
-        </div>
-        <form
-          className="flex flex-col mt-7 text-lg gap-1.5"
-          onSubmit={handleUpdate}
-          encType="multipart/form-data"
-        >
-          <label htmlFor="setProfileImg">Profile Picture</label>
-          <div className="flex items-center my-3">
-            <img
-              className="w-17 h-17 rounded-full"
-              src={file ? URL.createObjectURL(file) : PF + user.profilePhoto}
-              alt=""
-            />
-            <label htmlFor="fileInput">
-              <i className="relative top-6 right-6 p-1 text-white text-xl rounded-full bg-amber-500 cursor-pointer fa-solid fa-plus"></i>
-            </label>
-            <input
-              type="file"
-              id="fileInput"
-              className="hidden"
-              onChange={(e) => {
-                console.log(e);
-                setFile(e.target.files[0]);
-              }}
-            />
-          </div>
-          <label>Username</label>
-          <input
-            className="my-2 text-gray-700 h-8 border-b-2 border-gray-300 outline-0"
-            type="text"
-            placeholder={user.username}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <label>Email</label>
-          <input
-            className="my-2 text-gray-700 h-8 border-b-2 border-gray-300 outline-0"
-            type="email"
-            placeholder={user.email}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label>Password</label>
-          <input
-            className="my-2 text-gray-700 h-8 border-b-2 border-gray-300 outline-0"
-            type="password"
-            placeholder="Change Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button
-            className="mt-4 p-3 bg-emerald-500 rounded-full text-white font-semibold text-xl tracking-wider"
-            type="submit"
-          >
-            Update
-          </button>
-          {success && (
+    <>
+      {showDeleteMsg && <DeleteMsg onCancel={handleCancel} />}
+      <div className="flex font-lora ml-10 mt-5">
+        <div className="flex-9 p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-3xl text-amber-500">Update Your Account</span>
             <span
-              style={{ color: "green", textAlign: "center", marginTop: "20px" }}
+              className=" mb-1 text-base font-medium text-red-500 cursor-pointer"
+              onClick={() => setShowDeleteMsg(true)}
             >
-              Profile has been updated...
+              Delete Your Account
             </span>
-          )}
-        </form>
+          </div>
+          <form
+            className="flex flex-col mt-7 text-lg gap-1.5"
+            onSubmit={handleUpdate}
+            encType="multipart/form-data"
+          >
+            <label htmlFor="setProfileImg">Profile Picture</label>
+            <div className="flex items-center my-3">
+              <img
+                className="w-17 h-17 rounded-full"
+                src={file ? URL.createObjectURL(file) : PF + user.profilePhoto}
+                alt=""
+              />
+              <label htmlFor="fileInput">
+                <i className="relative top-6 right-6 p-1 text-white text-xl rounded-full bg-amber-500 cursor-pointer fa-solid fa-plus"></i>
+              </label>
+              <input
+                type="file"
+                id="fileInput"
+                className="hidden"
+                onChange={(e) => {
+                  console.log(e);
+                  setFile(e.target.files[0]);
+                }}
+              />
+            </div>
+            <label>Username</label>
+            <input
+              className="my-2 text-gray-700 h-8 border-b-2 border-gray-300 outline-0"
+              type="text"
+              placeholder={user.username}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <label>Email</label>
+            <input
+              className="my-2 text-gray-700 h-8 border-b-2 border-gray-300 outline-0"
+              type="email"
+              placeholder={user.email}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label>Password</label>
+            <input
+              className="my-2 text-gray-700 h-8 border-b-2 border-gray-300 outline-0"
+              type="password"
+              placeholder="Change Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              className="mt-4 p-3 bg-emerald-500 rounded-full text-white font-semibold text-xl tracking-wider"
+              type="submit"
+            >
+              Update
+            </button>
+            {success && (
+              <span
+                style={{
+                  color: "green",
+                  textAlign: "center",
+                  marginTop: "20px",
+                }}
+              >
+                Profile has been updated...
+              </span>
+            )}
+          </form>
+        </div>
+        <Sidebar />
       </div>
-      <Sidebar />
-    </div>
+    </>
   );
 };
 
