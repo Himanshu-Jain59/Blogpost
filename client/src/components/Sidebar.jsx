@@ -41,8 +41,8 @@ const Sidebar = () => {
           Categories
         </span>
         <ul className="text-xl text-center">
-          {cat.map((c) => (
-            <li className="inline-block w-1/2 mt-4 cursor-pointer">
+          {cat.map((c, ind) => (
+            <li className="inline-block w-1/2 mt-4 cursor-pointer" key={ind}>
               {/* {console.log(c)} */}
               <Link to={`/?cat=${c.name}`}>{c.name}</Link>
             </li>
