@@ -15,12 +15,16 @@ const Post = ({ post }) => {
       </Link>
       <div className="mt-4 flex flex-col items-center justify-center">
         <div>
-          {post.categories.map((ct) => (
+          {/* {post.categories.map((ct) => (
             <span className=" mr-2 font-varela text-base/8 text-[#be9656]">
-              {/* {console.log(ct)} */}
+              {console.log(ct)}
               {ct}
             </span>
-          ))}
+          ))} */}
+
+          <span className=" mr-2 font-varela text-base/8 text-[#be9656]">
+            <Link to={`/?user=${post.username}`}>{post.username}</Link>
+          </span>
         </div>
         <Link to={`/post/${post._id}`}>
           <span className="font-josefin font-bold mt-4  text-2xl">
