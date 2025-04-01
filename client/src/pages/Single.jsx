@@ -4,10 +4,10 @@ import Singlepost from "../components/Singlepost";
 
 const Single = () => {
   return (
-    <div className="flex gap-5">
+    <>
       <Singlepost />
-      <Sidebar />
-    </div>
+      {/* <Sidebar /> */}
+    </>
   );
 };
 
