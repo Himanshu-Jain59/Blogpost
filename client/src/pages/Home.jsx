@@ -27,9 +27,9 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <div className="flex m-10">
+      <div className="flex mx-7 my-10">
         <Posts posts={posts} />
-        <Sidebar />
+        {/* <Sidebar /> */}
       </div>
     </div>
   );
