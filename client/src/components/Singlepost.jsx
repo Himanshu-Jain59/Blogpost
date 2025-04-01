@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { Context } from "../context/Context";
+import DeleteMsg from "./DeleteMsg";
 
 const Singlepost = () => {
   const PF = "http://localhost:4000/public/";
+  const [showDeleteMsg, setShowDeleteMsg] = useState(false);
 
   const loc = useLocation();
   const postId = loc.pathname.split("/")[2];
@@ -18,7 +20,7 @@ const Singlepost = () => {
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get("/api/post/" + postId);
-      console.log(res.data);
+      // console.log(res.data);
       setPost(res.data);
       setTitle(res.data.title);
       setDesc(res.data.desc);
@@ -27,6 +29,9 @@ const Singlepost = () => {
     getPost();
   }, [postId]);
 
+  const handleCancel = () => {
+    setShowDeleteMsg(false); // Hide the delete confirmation message
+  };
   const handleUpdate = async (e) => {
     e.preventDefault();
     const updatePost = {
@@ -63,10 +68,14 @@ const Singlepost = () => {
   };
 
   return (
-    <div className="flex-9/12 ml-5">
-      <div className=" flex flex-col p-5 pr-0 ">
+    <>
+      {showDeleteMsg && (
+        <DeleteMsg onCancel={handleCancel} onDelete={handleDelete} />
+      )}
+      {/* <div className="flex px-10 "> */}
+      <div className=" flex flex-col p-5 px-10  ">
         <img
-          className="self-start w-auto  h-auto rounded-xl object-cover"
+          className=" w-auto  h-auto rounded-xl object-cover self-center"
           src={file ? URL.createObjectURL(file) : PF + post.photo}
           alt=""
         />
@@ -105,15 +114,15 @@ const Singlepost = () => {
                 <i
                   className="fa-solid fa-trash"
                   style={{ color: "#f53d3d" }}
-                  onClick={handleDelete}
+                  onClick={() => setShowDeleteMsg(true)}
                 ></i>
               </div>
             )}
           </h1>
         )}
-        <div className="mb-5 flex justify-between text-base text-[#b39656] font-varela">
+        <div className="mb-5 flex justify-between text-base text-[#b39656] font-varela ">
           <span>
-            Author:{" "}
+            Author:&nbsp;
             <b>
               <Link to={`/?user=${post.username}`}>{post.username}</Link>
             </b>
@@ -138,12 +147,13 @@ const Singlepost = () => {
             </button>
           </>
         ) : (
-          <p className="text-[#666] text-justify font-lora text-lg first-letter:ml-5 first-letter:text-3xl first-letter:font-semibold">
+          <p className=" text-[#666] text-justify font-lora text-lg first-letter:ml-5 first-letter:text-3xl first-letter:font-semibold">
             {desc}
           </p>
         )}
       </div>
-    </div>
+      {/* </div> */}
+    </>
   );
 };
 
