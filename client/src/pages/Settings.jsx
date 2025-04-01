@@ -3,6 +3,8 @@ import Sidebar from "../components/Sidebar";
 import { Context } from "../context/Context";
 import axios from "axios";
 import DeleteMsg from "../components/DeleteMsg";
+import EnterPass from "../components/EnterPass";
+import { toast } from "react-toastify";
 
 const Settings = () => {
   const { user, dispatch } = useContext(Context);
@@ -14,14 +16,23 @@ const Settings = () => {
 
   const [showDeleteMsg, setShowDeleteMsg] = useState(false);
 
+  const notify = () =>
+    toast.success("User details updated", {
+      position: "top-center",
+      autoClose: 2000,
+      theme: "colored",
+    });
   const handleCancel = () => {
     setShowDeleteMsg(false); // Hide the delete confirmation message
+  };
+  const cancelPass = () => {
+    setSuccess(false);
   };
 
   const PF = "http://localhost:4000/public/";
 
   const handleUpdate = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     dispatch({ type: "UPDATE_START" });
 
     const updatedUser = {
@@ -45,16 +56,33 @@ const Settings = () => {
     }
     try {
       const res = await axios.put("/api/user/" + user._id, updatedUser);
-      setSuccess(true);
+      // setSuccess(true);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
+      setSuccess(false);
+      notify();
     } catch (err) {
       dispatch({ type: "UPDATE_FAILURE" });
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/api/user/${user._id}`, {
+        data: { userId: user._id },
+      });
+      dispatch({ type: "LOGOUT" });
+      window.location.replace("/");
+    } catch (error) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
-      {showDeleteMsg && <DeleteMsg onCancel={handleCancel} />}
+      {success && <EnterPass cancel={cancelPass} confirm={handleUpdate} />}
+      {showDeleteMsg && (
+        <DeleteMsg onCancel={handleCancel} onDelete={handleDelete} />
+      )}
       <div className="flex font-lora ml-10 mt-5">
         <div className="flex-9 p-5">
           <div className="flex items-center justify-between">
@@ -68,7 +96,6 @@ const Settings = () => {
           </div>
           <form
             className="flex flex-col mt-7 text-lg gap-1.5"
-            onSubmit={handleUpdate}
             encType="multipart/form-data"
           >
             <label htmlFor="setProfileImg">Profile Picture</label>
@@ -115,25 +142,18 @@ const Settings = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
-              className="mt-4 p-3 bg-emerald-500 rounded-full text-white font-semibold text-xl tracking-wider"
-              type="submit"
+              className="mt-4 p-3 bg-emerald-500 rounded-full text-white font-semibold text-xl tracking-wider cursor-pointer"
+              // type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                setSuccess(true);
+              }}
             >
               Update
             </button>
-            {success && (
-              <span
-                style={{
-                  color: "green",
-                  textAlign: "center",
-                  marginTop: "20px",
-                }}
-              >
-                Profile has been updated...
-              </span>
-            )}
           </form>
         </div>
-        <Sidebar />
+        {/* <Sidebar /> */}
       </div>
     </>
   );
