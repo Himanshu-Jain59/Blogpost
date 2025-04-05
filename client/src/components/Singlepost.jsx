@@ -72,8 +72,8 @@ const Singlepost = () => {
       {showDeleteMsg && (
         <DeleteMsg onCancel={handleCancel} onDelete={handleDelete} />
       )}
-      {/* <div className="flex px-10 "> */}
-      <div className=" flex flex-col p-5 px-10  ">
+
+      <div className=" flex flex-col p-10 pb-20 bg-yellow-50  ">
         <img
           className=" w-auto  h-auto rounded-xl object-cover self-center"
           src={file ? URL.createObjectURL(file) : PF + post.photo}
@@ -152,7 +152,6 @@ const Singlepost = () => {
           </p>
         )}
       </div>
-      {/* </div> */}
     </>
   );
 };
