@@ -19,15 +19,12 @@ const Topbar = () => {
   };
 
   return (
-    <div className="py-5 bg-white w-full h-[50px] top-0 sticky flex items-center justify-around font-josefin z-11 ">
-      <div className=" flex items-center justify-center  gap-3">
-        <i className="text-2xl color-[#444] cursor-pointer fa-brands fa-square-facebook"></i>
-        <i className="text-2xl color-[#444] cursor-pointer fa-brands fa-square-twitter"></i>
-        <i className="text-2xl color-[#444] cursor-pointer fa-brands fa-square-pinterest"></i>
-        <i className="text-2xl color-[#444] cursor-pointer fa-brands fa-square-instagram"></i>
+    <div className="py-7 bg-white w-full h-[50px] top-0 sticky flex items-center justify-around font-josefin z-11 ">
+      <div className=" flex items-center justify-center  gap-3 ">
+        <span className="font-santaLove text-3xl">blogpost</span>
       </div>
-      <div className="flex items-center justify-around w-70">
-        <ul className="flex items-center justify-center gap-5 text-2xl font-light cursor-pointer">
+      <div className="flex items-center justify-center w-[30%]">
+        <ul className="flex items-center justify-end gap-3 text-2xl font-light cursor-pointer w-full">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -43,7 +40,7 @@ const Topbar = () => {
         </ul>
       </div>
 
-      <div className=" flex items-center justify-center gap-5">
+      <div className=" flex items-center justify-end  gap-5">
         {user && (
           <Link to="/settings">
             <img
@@ -59,7 +56,7 @@ const Topbar = () => {
             <div className="text-2xl font-josefin">{user.username}</div>
             <Link
               to="/"
-              className="text-lg border-2 border-gray-400 text-gray-600 pt-1 px-2 rounded-xl font-josefin"
+              className="text-lg border-2 border-red-500 text-white bg-red-500 pt-1 px-2 rounded-xl font-josefin  hover:bg-white hover:border-red-500 hover:text-red-500"
               onClick={handleLogout}
             >
               Logout
@@ -69,13 +66,13 @@ const Topbar = () => {
           <>
             <Link
               to="/login"
-              className="text-lg border-2 border-gray-400 text-gray-600 pt-1 px-2 rounded-xl font-josefin"
+              className="text-lg border-2 bg-amber-400 border-amber-400 text-white pt-1 px-3 rounded-xl font-josefin hover:bg-white hover:border-amber-400 hover:text-amber-400"
             >
               Login
             </Link>
             <Link
               to="/register"
-              className="text-lg border-2 border-gray-400 text-gray-600 pt-1 px-2 rounded-xl font-josefin "
+              className="text-lg border-2 border-[#379237] text-white bg-[#379237] pt-1 px-3 rounded-xl font-josefin  hover:bg-white hover:border-[#379237] hover:text-[#379237] "
             >
               Register
             </Link>
