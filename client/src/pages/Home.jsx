@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import Posts from "../components/Posts";
-import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
 import { Context } from "../context/Context";
 
@@ -27,10 +27,11 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <div className="flex mx-7 my-10">
+      <div className="flex mx-7 my-10 ">
         <Posts posts={posts} />
         {/* <Sidebar /> */}
       </div>
+      <Footer />
     </div>
   );
 };
