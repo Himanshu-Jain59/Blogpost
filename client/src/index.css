@@ -1,12 +1,21 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Varela+Round&display=swap");
-
+@font-face {
+  font-family: "santaLove";
+  src: url("../Santalove-BF67dc2d086e8c0.otf");
+}
+@font-face {
+  font-family: "love";
+  src: url("../HEROEAU-ELEGANT-DEMO-BF6414311733ad5.otf");
+}
 @import "tailwindcss";
 
 @theme {
+  --font-santaLove: "santaLove";
   --font-varela: "Varela Round", sans-serif;
   --font-lora: "Lora", sans-serif;
   --font-josefin: "Josefin Sans", sans-serif;
+  /* --font-heroeau: "heroeau"; */
 }
 
 body::-webkit-scrollbar {
