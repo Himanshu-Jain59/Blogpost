@@ -19,23 +19,31 @@ const Topbar = () => {
   };
 
   return (
-    <div className="py-7 bg-white w-full h-[50px] top-0 sticky flex items-center justify-around font-josefin z-11 ">
+    <div className="py-7 bg-[#ffffff] w-full h-13 top-0 sticky flex items-center justify-around font-josefin z-11 ">
       <div className=" flex items-center justify-center  gap-3 ">
         <span className="font-santaLove text-3xl">blogpost</span>
       </div>
       <div className="flex items-center justify-center w-[30%]">
         <ul className="flex items-center justify-end gap-3 text-2xl font-light cursor-pointer w-full">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className="hover:underline">
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/">About</Link>
+            <Link to="/about" className="hover:underline">
+              About
+            </Link>
           </li>
           <li>
-            <Link to="/">Contact</Link>
+            <Link to="/contact" className="hover:underline">
+              Contact
+            </Link>
           </li>
           <li>
-            <Link to="/write">Write</Link>
+            <Link to="/write" className="hover:underline">
+              Write
+            </Link>
           </li>
         </ul>
       </div>

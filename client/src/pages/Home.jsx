@@ -5,6 +5,8 @@ import Posts from "../components/Posts";
 import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
 import { Context } from "../context/Context";
+import Sideline from "../components/Sideline";
+import Category from "../components/Category";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -27,11 +29,13 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <div className="flex mx-7 my-10 ">
+      <Category />
+      <div className="flex mx-[3%] my-15 justify-center ">
         <Posts posts={posts} />
         {/* <Sidebar /> */}
+        {/* <Sideline /> */}
       </div>
-      <Footer />
+      <Footer color={"bg-amber-400"} />
     </div>
   );
 };

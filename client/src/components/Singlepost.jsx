@@ -73,9 +73,9 @@ const Singlepost = () => {
         <DeleteMsg onCancel={handleCancel} onDelete={handleDelete} />
       )}
 
-      <div className=" flex flex-col p-10 pb-20 bg-yellow-50  ">
+      <div className=" flex flex-col p-10 pb-50 bg-yellow-50  ">
         <img
-          className=" w-auto  h-auto rounded-xl object-cover self-center"
+          className=" min-w-150  h-auto rounded-xl object-cover self-center mb-5"
           src={file ? URL.createObjectURL(file) : PF + post.photo}
           alt=""
         />
@@ -120,7 +120,7 @@ const Singlepost = () => {
             )}
           </h1>
         )}
-        <div className="mb-5 flex justify-between text-base text-[#b39656] font-varela ">
+        <div className="mb-5 px-10 flex justify-between text-base text-[#b39656] font-varela ">
           <span>
             Author:&nbsp;
             <b>
@@ -147,7 +147,7 @@ const Singlepost = () => {
             </button>
           </>
         ) : (
-          <p className=" text-[#666] text-justify font-lora text-lg first-letter:ml-5 first-letter:text-3xl first-letter:font-semibold">
+          <p className=" px-10 whitespace-pre-line text-[#666] text-justify font-lora text-lg first-letter:ml-5 first-letter:text-3xl first-letter:font-semibold">
             {desc}
           </p>
         )}
