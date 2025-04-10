@@ -3,7 +3,17 @@ const Post = require("../models/Post");
 
 //new post
 router.post("/", async (req, res) => {
-  const newPost = new Post(req.body);
+  const { title, desc, photo, username, categories } = req.body;
+
+  // Create a new post document
+  const newPost = new Post({
+    title,
+    desc,
+    photo: photo || "defaultPostImg.jpg", // Use default if no photo provided
+    username,
+    categories: categories || [Life], // Handle array (assuming categories are sent as a comma-separated string)
+  });
+
   try {
     const savedPost = await newPost.save();
     console.log("post created");
@@ -84,7 +94,7 @@ router.get("/?", async (req, res) => {
     } else if (catName) {
       posts = await Post.find({ categories: { $in: [catName] } });
     } else {
-      posts = await Post.find();
+      posts = await Post.find().sort({ createdAt: -1 });
     }
     console.log("got post");
     res.status(200).json(posts);
