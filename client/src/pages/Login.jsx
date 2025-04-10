@@ -34,9 +34,9 @@ const Login = () => {
 
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
     } catch (err) {
-      if (err.response.data) {
-        notify();
-      }
+      // if (err.response.data) {
+      notify();
+      // }
       // console.error(err);
       dispatch({ type: "LOGIN_FAILURE" });
     }
