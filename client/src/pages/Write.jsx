@@ -1,4 +1,7 @@
 import React, { useContext, useState } from "react";
+import { MultiSelect } from "primereact/multiselect";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+import "primereact/resources/primereact.min.css";
 import { Context } from "../context/Context";
 import axios from "axios";
 
@@ -6,15 +9,20 @@ const Write = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
+  const [selectedCats, setSelectedCats] = useState(null);
   const { user } = useContext(Context);
   const PF = "http://localhost:4000/public/";
 
+  const cats = ["Life", "Social", "Music", "Sports", "Food", "Fashion"];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(selectedCats);
     const newPost = {
       username: user.username,
       title,
       desc,
+      categories: selectedCats,
     };
     if (file) {
       const data = new FormData();
@@ -35,7 +43,7 @@ const Write = () => {
     event.target.style.height = `${event.target.scrollHeight}px`; // Set height to scrollHeight
   };
   return (
-    <div className="mx-[17%] pt-12 ">
+    <div className="mx-[17%] pt-10 ">
       <img
         className=" w-[70vw] h-auto rounded-xl object-cover"
         src={file ? URL.createObjectURL(file) : PF + "defaultPostImg.jpg"}
@@ -63,10 +71,26 @@ const Write = () => {
             autoFocus={true}
             onChange={(e) => setTitle(e.target.value)}
           />
+          <div className="card flex justify-content-center w-50 outline-0">
+            <MultiSelect
+              value={selectedCats}
+              onChange={(e) => {
+                console.log(e.value);
+                setSelectedCats(e.value);
+                console.log(selectedCats);
+              }}
+              options={cats}
+              // optionLabel="name"
+              display="chip"
+              placeholder="Add Category"
+              maxSelectedLabels={3}
+              className="w-full md:w-20rem"
+            />
+          </div>
         </div>
         <div className="">
           <textarea
-            class="text-xl p-4 outline-none w-[65vw] resize-none overflow-hidden "
+            className="text-xl p-4 outline-none w-[65vw] resize-none overflow-hidden "
             placeholder="Write your story..."
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
@@ -75,7 +99,7 @@ const Write = () => {
         </div>
         <button
           type="submit"
-          className="ml-[88%] w-max text-white bg-teal-500 p-2 rounded-lg cursor-pointer font-semibold px-4 text-base  mb-7"
+          className="ml-[88%] w-max text-white bg-cyan-400 p-2 rounded-lg cursor-pointer font-semibold px-4 text-base  mb-7"
         >
           Publish
         </button>
