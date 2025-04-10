@@ -33,7 +33,7 @@ const Header = () => {
           <span className="absolute top-[13%] text-[125px] ">Blogpost</span>
         </div>
         <img
-          className=" w-full h-120  object-cover mt-16"
+          className=" w-full h-120 object-cover mt-10"
           src="https://royalcitynursery.com/wp-content/uploads/elementor/thumbs/royal-city-nursery-the-importance-of-sun-exposure-sunlight-qb41eglqn3f0vlk7z1lbtmprbj1fmi5i2j3t5lzafc.jpg "
           alt=""
         />
