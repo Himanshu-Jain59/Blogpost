@@ -24,7 +24,7 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-[url('https://a-z-animals.com/media/2022/10/iStock-1298291139-1024x680.jpg')] bg-cover bg-no-repeat font-lora">
+    <div className="bg-[url('/images/login.jpg')] bg-cover bg-no-repeat font-lora">
       <div className="  backdrop-blur-xs  w-full h-[92vh] flex flex-col justify-center items-center  ">
         <div className="w-2/5 border-3 p-10 flex flex-col justify-center items-center rounded-2xl">
           <form className=" w-full m-5 flex flex-col " onSubmit={handleSubmit}>
@@ -64,7 +64,9 @@ const Register = () => {
             <span className="text-lg text-white">Already have an account?</span>
 
             <Link to="/login">
-              <button className="ml-2  text-lg cursor-pointer  ">Login</button>
+              <button className="ml-2  text-lg cursor-pointer hover:underline  ">
+                Login
+              </button>
             </Link>
           </div>
         </div>
