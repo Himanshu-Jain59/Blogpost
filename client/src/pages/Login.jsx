@@ -72,7 +72,10 @@ const Login = () => {
             <span className="text-lg text-white">Don't have an account?</span>
 
             <Link to="/register">
-              <button className="ml-2  text-lg cursor-pointer " type="submit">
+              <button
+                className="ml-2  text-lg cursor-pointer hover:underline  "
+                type="submit"
+              >
                 Register
               </button>
             </Link>
