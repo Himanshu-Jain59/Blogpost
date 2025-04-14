@@ -43,7 +43,7 @@ const Login = () => {
   };
   // console.log(user);
   return (
-    <div className="bg-[url('https://a-z-animals.com/media/2022/10/iStock-1298291139-1024x680.jpg')] bg-cover bg-no-repeat font-lora">
+    <div className="bg-[url('/images/login.jpg')] bg-cover bg-no-repeat font-lora">
       <div className="  backdrop-blur-xs  w-full h-[92vh] flex flex-col justify-center items-center  ">
         <div className="w-2/5 border-3 p-10 flex flex-col justify-center items-center rounded-2xl">
           <form className=" w-full m-5 flex flex-col " onSubmit={handleSubmit}>
