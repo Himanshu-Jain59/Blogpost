@@ -19,9 +19,22 @@ const Settings = () => {
   const notify = () =>
     toast.success("User details updated", {
       position: "top-center",
-      autoClose: 2000,
+      autoClose: 1000,
       theme: "colored",
     });
+  const fail = () =>
+    toast.error("Username or email already exist", {
+      position: "top-center",
+      autoClose: 1000,
+      theme: "colored",
+    });
+  const deleted = () =>
+    toast.error("User Deleted", {
+      position: "top-center",
+      autoClose: 1000,
+      theme: "colored",
+    });
+
   const handleCancel = () => {
     setShowDeleteMsg(false); // Hide the delete confirmation message
   };
@@ -31,8 +44,7 @@ const Settings = () => {
 
   const PF = "http://localhost:4000/public/";
 
-  const handleUpdate = async (e) => {
-    if (e) e.preventDefault();
+  const handleUpdate = async () => {
     dispatch({ type: "UPDATE_START" });
 
     const updatedUser = {
@@ -61,6 +73,8 @@ const Settings = () => {
       setSuccess(false);
       notify();
     } catch (err) {
+      console.log(err);
+      fail();
       dispatch({ type: "UPDATE_FAILURE" });
     }
   };
@@ -70,6 +84,7 @@ const Settings = () => {
       await axios.delete(`/api/user/${user._id}`, {
         data: { userId: user._id },
       });
+      deleted();
       dispatch({ type: "LOGOUT" });
       window.location.replace("/");
     } catch (error) {
@@ -83,7 +98,7 @@ const Settings = () => {
       {showDeleteMsg && (
         <DeleteMsg onCancel={handleCancel} onDelete={handleDelete} />
       )}
-      <div className="flex flex-col m-10 p-10 rounded-xl font-lora bg-gray-100">
+      <div className="flex flex-col mx-10 p-10 rounded-xl font-lora bg-gray-100">
         {/* <div className="flex-9 p-5"> */}
         <div className="flex items-center justify-between">
           <span className="text-3xl text-amber-500">Update Your Account</span>

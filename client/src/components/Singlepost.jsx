@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { Context } from "../context/Context";
 import DeleteMsg from "./DeleteMsg";
 
@@ -16,6 +17,18 @@ const Singlepost = () => {
   const [title, setTitle] = useState();
   const [desc, setDesc] = useState(post.desc);
   const [updateMode, setUpdateMode] = useState(false);
+
+  const deleted = () =>
+    toast.error("Post Deleted", {
+      position: "top-center",
+      autoClose: 2000,
+    });
+
+  const updated = () =>
+    toast.success("Post Updated", {
+      position: "top-center",
+      autoClose: 2000,
+    });
 
   useEffect(() => {
     const getPost = async () => {
@@ -51,6 +64,7 @@ const Singlepost = () => {
     try {
       await axios.put(`/api/post/${post._id}`, updatePost);
       setUpdateMode(false);
+      updated();
     } catch (err) {}
   };
   const handleDelete = async () => {
@@ -58,6 +72,7 @@ const Singlepost = () => {
       await axios.delete(`/api/post/${post._id}`, {
         data: { username: user.username },
       });
+      await deleted();
       window.location.replace("/");
     } catch (err) {}
   };

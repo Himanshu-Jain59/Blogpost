@@ -1,11 +1,25 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const notify = () =>
+    toast.error("Username or email already exist", {
+      position: "top-center",
+      autoClose: 2000,
+      theme: "colored",
+    });
+  const successfull = async () =>
+    toast.success("User Registered", {
+      position: "top-center",
+      autoClose: 1500,
+      theme: "colored",
+    });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,11 +29,12 @@ const Register = () => {
         email,
         password,
       });
-      console.log(res);
-      // alert("User Registered");
+      // console.log(res);
+      await successfull();
       window.location.replace("/login");
     } catch (error) {
-      alert(error.response.data.error);
+      // alert(error.response.data.error);
+      notify();
     }
   };
 
@@ -34,7 +49,7 @@ const Register = () => {
               className="p-2 px-4 bg-white rounded-md outline-0 "
               type="text"
               value={username}
-              placeholder="Naruto Uzumaki"
+              placeholder="Enter Username"
               onChange={(e) => setUsername(e.target.value)}
             />
             <label className="my-2 text-xl ml-2">Email</label>
@@ -42,7 +57,7 @@ const Register = () => {
               className="p-2 px-4 bg-white rounded-md outline-0 "
               type="email"
               value={email}
-              placeholder="Naruto@Uzumaki.com"
+              placeholder="Enter Email"
               onChange={(e) => setEmail(e.target.value)}
             />
             <label className="my-2 text-xl ml-2 ">Password</label>

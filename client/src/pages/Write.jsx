@@ -4,16 +4,29 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import "primereact/resources/primereact.min.css";
 import { Context } from "../context/Context";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Write = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
-  const [selectedCats, setSelectedCats] = useState(null);
+  const [selectedCats, setSelectedCats] = useState([]);
   const { user } = useContext(Context);
   const PF = "http://localhost:4000/public/";
 
   const cats = ["Life", "Social", "Music", "Sports", "Food", "Fashion"];
+
+  const fail = (msg) =>
+    toast.error(msg, {
+      position: "top-center",
+      autoClose: 1000,
+      theme: "colored",
+    });
+  const notify = () =>
+    toast.success("Post Created", {
+      position: "top-center",
+      autoClose: 1000,
+    });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +37,10 @@ const Write = () => {
       desc,
       categories: selectedCats,
     };
+    if (selectedCats.length > 3) {
+      fail("max 3 categories allowed ");
+      return;
+    }
     if (file) {
       const data = new FormData();
       const filename = `${new Date().toJSON().slice(0, 10)}-${file.name}`;
@@ -36,7 +53,10 @@ const Write = () => {
     try {
       const res = await axios.post("/api/post", newPost);
       window.location.replace("/post/" + res.data._id);
-    } catch (err) {}
+      notify();
+    } catch (err) {
+      fail("All fields are required");
+    }
   };
   const autoResize = (event) => {
     event.target.style.height = "auto"; // Reset height
