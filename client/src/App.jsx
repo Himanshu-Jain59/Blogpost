@@ -22,20 +22,30 @@ const App = () => {
           <>
             <Topbar />
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/about" element={<About />} />
+              <Route exact path="/contact" element={<Contact />} />
               <Route
+                exact
                 path="/register"
                 element={user ? <Home /> : <Register />}
               />
-              <Route path="/login" element={user ? <Home /> : <Login />} />
               <Route
+                exact
+                path="/login"
+                element={user ? <Home /> : <Login />}
+              />
+              <Route
+                exact
                 path="/settings"
                 element={user ? <Settings /> : <Login />}
               />
-              <Route path="/post/:postId" element={<Single />} />
-              <Route path="/write" element={user ? <Write /> : <Login />} />
+              <Route exact path="/post/:postId" element={<Single />} />
+              <Route
+                exact
+                path="/write"
+                element={user ? <Write /> : <Login />}
+              />
             </Routes>
           </>
         </Router>
