@@ -52,9 +52,10 @@ const Login = () => {
             <input
               className="p-2 px-4 bg-white rounded-md outline-0 "
               type="text"
-              placeholder="Naruto"
+              placeholder="Enter username"
               ref={userRef}
             />
+
             <label className="my-2 text-2xl ml-2 ">Password</label>
             <input
               className="p-2 px-4 bg-white rounded-md outline-0  "
