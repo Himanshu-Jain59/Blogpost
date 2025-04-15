@@ -6,9 +6,16 @@ const bcrypt = require("bcryptjs");
 //Update
 router.put("/:id", async (req, res) => {
   if (req.body.userId == req.params.id) {
+    const checkUsers = await User.findOne({
+      $or: [{ email: req.body.email }, { username: req.body.username }],
+    });
+    if (checkUsers && req.body.userId != checkUsers._id) {
+      // console.log(checkUsers);
+      return res.status(400).json({ error: "Username or email already exist" });
+    }
+
     if (req.body.password) {
       const salt = await bcrypt.genSalt(10);
-
       req.body.password = await bcrypt.hash(req.body.password, salt);
     }
     try {

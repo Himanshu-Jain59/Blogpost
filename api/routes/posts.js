@@ -4,14 +4,16 @@ const Post = require("../models/Post");
 //new post
 router.post("/", async (req, res) => {
   const { title, desc, photo, username, categories } = req.body;
-
+  if (categories.length == 0) {
+    return res.status(400).json("wrong credentials");
+  }
   // Create a new post document
   const newPost = new Post({
     title,
     desc,
     photo: photo || "defaultPostImg.jpg", // Use default if no photo provided
     username,
-    categories: categories || [Life], // Handle array (assuming categories are sent as a comma-separated string)
+    categories: categories,
   });
 
   try {

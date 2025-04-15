@@ -11,9 +11,7 @@ router.post("/register", async (req, res) => {
     }
     const checkUsers = await User.findOne({ $or: [{ email }, { username }] });
     if (checkUsers) {
-      return res
-        .status(400)
-        .json({ error: "Username and email already exist" });
+      return res.status(400).json({ error: "Username or email already exist" });
     } else {
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(req.body.password, salt);
@@ -27,12 +25,7 @@ router.post("/register", async (req, res) => {
       res.status(200).json(user);
     }
   } catch (err) {
-    // if (err.code == 11000) {
-    //   alert("user already exists");
-    // }
-    // console.log(err);
-    // console.error(err.code);
-
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -48,7 +41,7 @@ router.post("/login", async (req, res) => {
     const validate = await bcrypt.compare(req.body.password, user.password);
 
     if (!validate) return res.status(400).json("wrong credentials");
-    console.log("Loggen in ");
+    console.log("Logged in ");
 
     const { password, ...others } = user._doc;
 
