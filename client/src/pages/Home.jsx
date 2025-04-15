@@ -5,7 +5,6 @@ import Posts from "../components/Posts";
 import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
 import { Context } from "../context/Context";
-import Sideline from "../components/Sideline";
 import Category from "../components/Category";
 
 const Home = () => {
@@ -20,10 +19,10 @@ const Home = () => {
       });
       // console.log(res.data);
       setPosts(res.data);
-      // console.log(posts);
     };
 
     fetchPost();
+    // console.log(posts);
   }, [search]);
 
   return (
@@ -31,9 +30,16 @@ const Home = () => {
       <Header />
       <Category />
       <div className="flex mx-[3%] my-15 justify-center ">
-        <Posts posts={posts} />
+        {posts.length == 0 ? (
+          <p className="text-xl text-center h-100 ">
+            <span className="text-5xl font-semibold"> 404 Not Found </span>
+            <br />
+            no post of this category
+          </p>
+        ) : (
+          <Posts posts={posts} />
+        )}
         {/* <Sidebar /> */}
-        {/* <Sideline /> */}
       </div>
       <Footer color={"bg-amber-400"} />
     </div>
