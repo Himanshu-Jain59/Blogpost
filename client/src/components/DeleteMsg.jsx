@@ -19,7 +19,7 @@ const DeleteMsg = ({ onCancel, onDelete }) => {
           </button>
 
           <button
-            className="px-4 py-1 border-2 font-semibold  border-red-700 text-white cursor-pointer rounded-lg m-6 bg-red-500"
+            className="px-4 py-1 border-2 font-semibold  border-red-700 text-white cursor-pointer rounded-lg m-6 bg-red-500 active:bg-red-400"
             onClick={onDelete}
           >
             Delete

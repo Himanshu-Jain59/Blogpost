@@ -25,9 +25,7 @@ const EnterPass = ({ cancel, confirm }) => {
       });
       confirm();
     } catch (err) {
-      if (err.response.data) {
-        notify();
-      }
+      notify();
     }
   };
   return (
@@ -39,6 +37,7 @@ const EnterPass = ({ cancel, confirm }) => {
         </p>
         <form onSubmit={checkPass}>
           <input
+            autoFocus
             type="password"
             className="my-2 p-2 rounded-lg outline-0 w-full border-2 text-xl border-gray-400"
             ref={passwordRef}
@@ -52,7 +51,7 @@ const EnterPass = ({ cancel, confirm }) => {
             </button>
 
             <button
-              className="px-4 py-1 border-2 font-semibold  border-emerald-700 text-white cursor-pointer rounded-lg m-6 bg-emerald-500"
+              className="px-4 py-1 border-2 font-semibold  border-emerald-700 text-white cursor-pointer rounded-lg m-6 bg-emerald-500 active:bg-emerald-400"
               // onClick={checkPass}
               type="submit"
             >
